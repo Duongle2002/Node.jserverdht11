@@ -85,6 +85,10 @@ app.get('/history', async (req, res) => {
       res.status(500).send("Error retrieving history data");
     }
   });
+
+app.get('/api/history', (req, res) => {
+  res.json(historyData);
+})
 app.get('/',  (req, res) => {
     res.render('index',{ temperature, humidity });
   });
