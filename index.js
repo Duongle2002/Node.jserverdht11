@@ -86,9 +86,16 @@ app.get('/history', async (req, res) => {
     }
   });
 
-app.get('/api/history', (req, res) => {
-  res.json(historyData);
-})
+app.get('/api/history',async (req, res) => {
+  try {
+    const historyData = await data.find(); // Lấy tất cả dữ liệu từ MongoDB, sắp xếp theo timestamp giảm dần
+    res.json(historyData); // Truyền historyData vào view
+  } catch (err) {
+    console.error("Error retrieving history data:", err);
+    res.status(500).send("Error retrieving history data");
+  }
+});
+  
 app.get('/',  (req, res) => {
     res.render('index',{ temperature, humidity });
   });
