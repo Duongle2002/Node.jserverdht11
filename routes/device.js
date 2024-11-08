@@ -1,4 +1,3 @@
-// routes/device.js
 const express = require('express');
 const router = express.Router();
 const Data = require('../model/data'); // Assuming the model is capitalized
@@ -36,12 +35,12 @@ router.post('/updateData', async (req, res) => {
     console.log(`Received data - Temperature: ${temperature}, Humidity: ${humidity}`);
 });
 
-// Device status API for ESP32
+// Device status API for ESP32 (with authentication)
 router.get('/getDeviceStatus', authenticateToken, (req, res) => {
     res.json(deviceStatus);
 });
 
-// Control devices from mobile router
+// Control devices from mobile router (with authentication)
 router.post('/setDeviceStatus', authenticateToken, (req, res) => {
     const { device, status } = req.body;
 
