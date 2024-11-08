@@ -12,7 +12,7 @@ router.get('/', authenticateToken,  (req, res) => {
     res.render('index',{ temperature, humidity });
   });
 // ESP32 data update
-router.post('/updateData',authenticateToken, async (req, res) => {
+router.post('/updateData', async (req, res) => {
     temperature = parseFloat(req.body.temperature);
     humidity = parseFloat(req.body.humidity);
   
@@ -36,7 +36,7 @@ router.post('/updateData',authenticateToken, async (req, res) => {
 router.get('/getDeviceStatus', authenticateToken,(req, res) => res.json(deviceStatus));
 
 // Control devices from mobile router
-router.post('/setDeviceStatus',authenticateToken, (req, res) => {
+router.post('/setDeviceStatus', (req, res) => {
     const { device, status } = req.body;
   
     // Cập nhật trạng thái thiết bị
@@ -49,7 +49,7 @@ router.post('/setDeviceStatus',authenticateToken, (req, res) => {
     }
   });
   
-  router.post('/updateData',authenticateToken, (req, res) => {
+  router.post('/updateData', (req, res) => {
       temperature = parseFloat(req.body.temperature);
       humidity = parseFloat(req.body.humidity);
     
