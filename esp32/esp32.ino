@@ -91,7 +91,7 @@ void sendDataToServer(float temperature, float humidity) {
     String postData = "temperature=" + String(temperature) + "&humidity=" + String(humidity);
 
     http.begin(serverURL + "/updateData");  // URL server nhận dữ liệu
-    // http.addHeader("Content-Type", "application/x-www-form-urlencoded");
+    http.addHeader("Content-Type", "application/x-www-form-urlencoded");
 
     int httpResponseCode = http.POST(postData);
     if (httpResponseCode > 0) {
