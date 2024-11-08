@@ -14,14 +14,15 @@ const dataRoutes = require('./routes/data');
 const app = express();
 const PORT = 3000;
 
-// Connect to MongoDB
+// Kết nối tới MongoDB
 connectDB();
 
-// Set up view engine
+// Cấu hình view engine
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
 // Middleware
+app.use(cookieParser()); // Đảm bảo cookieParser được sử dụng trước khi sử dụng bất kỳ route nào cần xác thực
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
@@ -31,22 +32,21 @@ app.use((req, res, next) => {
   next();
 });
 
-// Import routes
-app.use('/updateData',dataRoutes );
-app.use(cookieParser());
-
 // Routes
 app.use('/auth', authRoutes);
+app.use('/', dataRoutes); // Áp dụng dataRoutes mà không cần xác thực ở đây
 
-app.use('/', authenticateToken, deviceRoutes); // Protect device routes
-app.use('/', authenticateToken, scheduleRoutes); // Protect schedule routes
-app.use('/',authenticateToken, historyRoutes);
-// Protect homepage with authentication
+// Các route bảo mật
+app.use('/', authenticateToken, deviceRoutes); // Bảo vệ các route của device
+app.use('/', authenticateToken, scheduleRoutes); // Bảo vệ các route của schedule
+app.use('/', authenticateToken, historyRoutes); // Bảo vệ các route của history
+
+// Bảo vệ trang chủ với xác thực
 app.get('/', authenticateToken, (req, res) => {
   res.render('index', { temperature: 0, humidity: 0 });
 });
 
-// Start server
+// Khởi động server
 app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
+  console.log(`Server đang chạy tại http://localhost:${PORT}`);
 });
