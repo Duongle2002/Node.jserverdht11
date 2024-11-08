@@ -1,9 +1,10 @@
 const express = require('express');
 const router = express.Router();
-const Data = require('../model/data');
+const Data = require('../model/data'); // Model lưu dữ liệu
 
 // Khai báo mảng historyData để lưu trữ lịch sử
-let historyData = []; // Thêm dòng này
+let historyData = [];
+let deviceStatus = { DEVICE1: 'OFF', DEVICE2: 'OFF', DEVICE3: 'OFF' };
 
 // ESP32 data update (Không yêu cầu authenticateToken)
 router.post('/updateData', async (req, res) => {
@@ -17,7 +18,7 @@ router.post('/updateData', async (req, res) => {
 
     // Add data to history with a timestamp
     const timestamp = new Date();
-    historyData.push({ temperature, humidity, timestamp }); // Thêm dữ liệu vào history
+    historyData.push({ temperature, humidity, timestamp });
 
     // Save data to MongoDB
     const dataEntry = new Data({ temperature, humidity, timestamp });
@@ -31,6 +32,25 @@ router.post('/updateData', async (req, res) => {
     }
 
     console.log(`Received data - Temperature: ${temperature}, Humidity: ${humidity}`);
+});
+
+// API to get device status
+router.get('/getDeviceStatus', (req, res) => {
+    res.json(deviceStatus);
+});
+
+// API to set device status
+router.post('/setDeviceStatus', (req, res) => {
+    const { device, status } = req.body;
+
+    // Validate device and status
+    if (deviceStatus.hasOwnProperty(device) && (status === 'ON' || status === 'OFF')) {
+        deviceStatus[device] = status;
+        console.log(`Set ${device} to ${status}`);
+        res.send(`Device ${device} set to ${status}`);
+    } else {
+        res.status(400).send('Invalid device or status');
+    }
 });
 
 module.exports = router;
