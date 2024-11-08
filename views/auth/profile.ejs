@@ -1,0 +1,25 @@
+<!-- views/auth/profile.ejs -->
+<%- include('../partials/header') %>
+<h2>Chỉnh sửa hồ sơ</h2>
+<form action="/profile" method="POST">
+    <label for="userDisplay">Tên hiển thị:</label>
+    <input type="text" id="userDisplay" name="userDisplay" value="<%= user.userDisplay %>">
+
+    <label for="birthday">Ngày sinh:</label>
+    <input type="date" id="birthday" name="birthday" value="<%= user.birthday ? user.birthday.toISOString().split('T')[0] : '' %>">
+
+    <label for="gender">Giới tính:</label>
+    <select id="gender" name="gender">
+        <option value="male" <%= user.gender === 'male' ? 'selected' : '' %>>Nam</option>
+        <option value="female" <%= user.gender === 'female' ? 'selected' : '' %>>Nữ</option>
+        <option value="other" <%= user.gender === 'other' ? 'selected' : '' %>>Khác</option>
+    </select>
+
+    <label for="location">Địa chỉ:</label>
+    <input type="text" id="location" name="location" value="<%= user.location %>">
+
+    <button type="submit">Cập nhật hồ sơ</button>
+</form>
+</body>
+</html>
+
