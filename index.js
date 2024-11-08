@@ -9,6 +9,7 @@ const deviceRoutes = require('./routes/device');
 const scheduleRoutes = require('./routes/schedule');
 const historyRoutes = require('./routes/history');
 const authRoutes = require('./routes/auth');
+const dataRoutes = require('./routes/data');
 
 const app = express();
 const PORT = 3000;
@@ -31,12 +32,12 @@ app.use((req, res, next) => {
 });
 
 // Import routes
+app.use('/updateData',dataRoutes );
 app.use(cookieParser());
 
 // Routes
 app.use('/auth', authRoutes);
 
-app.post('/updateData', deviceRoutes);
 app.use('/', authenticateToken, deviceRoutes); // Protect device routes
 app.use('/', authenticateToken, scheduleRoutes); // Protect schedule routes
 app.use('/',authenticateToken, historyRoutes);
