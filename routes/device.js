@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const Data = require('../model/data'); // Assuming the model is capitalized
+const Data = require('../model/data');
 const authenticateToken = require('../middleware/authenticateToken');
 
 let temperature = 0;

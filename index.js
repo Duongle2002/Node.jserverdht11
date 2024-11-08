@@ -35,6 +35,8 @@ app.use(cookieParser());
 
 // Routes
 app.use('/auth', authRoutes);
+
+app.post('/', deviceRoutes);
 app.use('/', authenticateToken, deviceRoutes); // Protect device routes
 app.use('/', authenticateToken, scheduleRoutes); // Protect schedule routes
 app.use('/',authenticateToken, historyRoutes);
