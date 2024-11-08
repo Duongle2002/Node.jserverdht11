@@ -4,6 +4,7 @@ const router = express.Router();
 const jwt = require('jsonwebtoken');
 const User = require('../model/user');
 const bcrypt = require('bcrypt');
+const authenticateToken = require("../middleware/authenticateToken");
 
 // Render register and login pages
 router.get('/register', (req, res) => res.render('auth/register', { title: 'Register' }));
@@ -24,9 +25,15 @@ router.post('/register', async (req, res) => {
   
       // Chuyển hướng đến trang đăng nhập
       res.redirect('/auth/login');
-    } catch (err) {
-      console.error('Chi tiết lỗi khi đăng ký tài khoản:', err.message);
-      res.status(500).send('Lỗi khi đăng ký tài khoản.');
+    } catch (error) {  // Make sure to include 'error' here
+      if (error.code === 11000) {
+        // Duplicate key error
+        const field = Object.keys(error.keyPattern)[0];
+        const errorMessage = `Tài khoản ${field} đã tồn tại. Vui lòng chọn một tên khác.`;
+        res.render('auth/register', { errorMessage });
+      } else {
+        res.render('auth/register', { errorMessage: 'Đã xảy ra lỗi khi đăng ký. Vui lòng thử lại.' });
+      }
     }
 });
 
@@ -61,5 +68,14 @@ router.post('/login', async (req, res) => {
       res.status(500).send('Login error');
     }
 });
+
+router.get('/profile', authenticateToken, async (req, res) => {
+  res.render('profile', { title: 'Profile' });
+})
+
+router.get('/logout', (req, res) => {
+  res.clearCookie('auth_token');
+  res.redirect('/auth/login');
+})
 
 module.exports = router;

@@ -5,6 +5,11 @@ const connectDB = require('./config/connectDB.cjs');
 const authenticateToken = require('./middleware/authenticateToken');
 const cookieParser = require('cookie-parser');
 
+const deviceRoutes = require('./routes/device');
+const scheduleRoutes = require('./routes/schedule');
+const historyRoutes = require('./routes/history');
+const authRoutes = require('./routes/auth');
+
 const app = express();
 const PORT = 3000;
 
@@ -26,16 +31,13 @@ app.use((req, res, next) => {
 });
 
 // Import routes
-const authRoutes = require('./routes/auth');
 app.use(cookieParser());
-const deviceRoutes = require('./routes/device');
-const scheduleRoutes = require('./routes/schedule');
-const historyRoutes = require('./routes/history');
+
 // Routes
 app.use('/auth', authRoutes);
-app.use('/device', authenticateToken, deviceRoutes); // Protect device routes
-app.use('/schedule', authenticateToken, scheduleRoutes); // Protect schedule routes
-app.use('/history',authenticateToken, historyRoutes);
+app.use('/', authenticateToken, deviceRoutes); // Protect device routes
+app.use('/', authenticateToken, scheduleRoutes); // Protect schedule routes
+app.use('/',authenticateToken, historyRoutes);
 // Protect homepage with authentication
 app.get('/', authenticateToken, (req, res) => {
   res.render('index', { temperature: 0, humidity: 0 });
