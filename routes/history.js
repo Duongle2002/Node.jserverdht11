@@ -9,7 +9,7 @@ router.get('/history', authenticateToken, async (req, res) => {
     const historyData = await data.find().sort({ timestamp: -1 }); // Lấy tất cả dữ liệu từ MongoDB, sắp xếp theo timestamp giảm dần
     res.render('history', { historyData }); // Truyền historyData vào view
   } catch (err) {
-    console.error("Error retrieving history data:", err);
+    // console.error("Error retrieving history data:", err);
     res.status(500).send("Error retrieving history data");
   }
 });
@@ -20,7 +20,7 @@ router.get('/api/history', authenticateToken, async (req, res) => {
     const historyData = await data.find().sort({ timestamp: -1 }); // Sắp xếp dữ liệu theo timestamp giảm dần
     res.json(historyData); // Trả về dữ liệu dưới dạng JSON
   } catch (err) {
-    console.error("Error retrieving history data:", err);
+    // console.error("Error retrieving history data:", err);
     res.status(500).send("Error retrieving history data");
   }
 });

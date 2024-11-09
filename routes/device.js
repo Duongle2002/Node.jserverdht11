@@ -18,7 +18,7 @@ router.get('/', authenticateToken, async (req, res) => {
             res.render('index', { temperature: 'N/A', humidity: 'N/A' });
         }
     } catch (error) {
-        console.error('Lỗi khi lấy dữ liệu từ cơ sở dữ liệu:', error);
+        // console.error('Lỗi khi lấy dữ liệu từ cơ sở dữ liệu:', error);
         res.status(500).send('Lỗi khi lấy dữ liệu');
     }
 });
