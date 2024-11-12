@@ -104,14 +104,14 @@ router.post('/api/register', async (req, res) => {
 // Route đăng nhập (API cho Flutter)
 router.post('/api/login', async (req, res) => {
   try {
-    const { email, password } = req.body;
+    const { username, password } = req.body;
 
-    const user = await User.findOne({ email });
-    if (!user) return res.status(400).json({ message: 'Invalid email or password' });
+    const user = await User.findOne({ username });
+    if (!user) return res.status(400).json({ message: 'Invalid username or password' });
 
     // Kiểm tra mật khẩu
     const isPasswordValid = await bcrypt.compare(password, user.password);
-    if (!isPasswordValid) return res.status(400).json({ message: 'Invalid email or password' });
+    if (!isPasswordValid) return res.status(400).json({ message: 'Invalid username or password' });
 
     // Tạo JWT Token
     const token = jwt.sign({ userId: user._id }, 'your_jwt_secret', { expiresIn: '1h' });
