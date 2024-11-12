@@ -14,7 +14,8 @@
 DHT dht(DHTPIN, DHTTYPE);
 
 // Thông tin Wi-Fi
-const char* ssid = "VIETTEL_AP_E651A8";
+// const char* ssid = "VIETTEL_AP_E651A8";
+const char* ssid = "LE_HUU_DUONG";
 const char* password = "1234567890a";
 
 // URL của server Node.js

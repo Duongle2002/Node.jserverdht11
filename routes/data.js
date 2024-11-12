@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const Data = require('../model/data'); // Model lưu dữ liệu
+const Data = require('../model/data');
 
 // Khai báo mảng historyData để lưu trữ lịch sử
 let historyData = [];
@@ -52,5 +52,7 @@ router.post('/setDeviceStatus', (req, res) => {
         res.status(400).send('Invalid device or status');
     }
 });
+
+
 
 module.exports = router;
