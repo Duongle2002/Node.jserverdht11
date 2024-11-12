@@ -78,4 +78,58 @@ router.get('/logout', (req, res) => {
   res.redirect('/auth/login');
 })
 
+// Route đăng ký (API cho Flutter)
+router.post('/api/register', async (req, res) => {
+  try {
+    const { username, email, password } = req.body;
+
+    // Kiểm tra nếu người dùng đã tồn tại
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
+      return res.status(400).json({ message: 'Email đã tồn tại.' });
+    }
+
+    // Tạo và lưu người dùng mới
+    const hashedPassword = await bcrypt.hash(password, 10); // Mã hóa mật khẩu
+    const user = new User({ username, email, password: hashedPassword });
+    await user.save();
+
+    res.status(201).json({ message: 'Đăng ký thành công.' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Đã xảy ra lỗi khi đăng ký. Vui lòng thử lại.' });
+  }
+});
+
+// Route đăng nhập (API cho Flutter)
+router.post('/api/login', async (req, res) => {
+  try {
+    const { email, password } = req.body;
+
+    const user = await User.findOne({ email });
+    if (!user) return res.status(400).json({ message: 'Invalid email or password' });
+
+    // Kiểm tra mật khẩu
+    const isPasswordValid = await bcrypt.compare(password, user.password);
+    if (!isPasswordValid) return res.status(400).json({ message: 'Invalid email or password' });
+
+    // Tạo JWT Token
+    const token = jwt.sign({ userId: user._id }, 'your_jwt_secret', { expiresIn: '1h' });
+
+    // Trả về token trong phản hồi
+    res.status(200).json({ message: 'Đăng nhập thành công.', token });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Đã xảy ra lỗi khi đăng nhập. Vui lòng thử lại.' });
+  }
+});
+
+// Route logout (API cho Flutter)
+router.post('/api/logout', (req, res) => {
+  res.clearCookie('auth_token');
+  res.status(200).json({ message: 'Đăng xuất thành công.' });
+});
+
+
+
 module.exports = router;
