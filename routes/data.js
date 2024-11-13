@@ -52,6 +52,19 @@ router.post('/setDeviceStatus', (req, res) => {
         res.status(400).send('Invalid device or status');
     }
 });
+router.get('/api/sensorData', async (req, res) => {
+    try {
+        const  latestData = await Data.findOne().sort({ timestamp: -1 });
+        if (latestData) {
+            const { temperature, humidity } = latestData;
+            res.json( { temperature, humidity });
+        }else {
+            res.json({ temperature: 'N/A', humidity: 'N/A' });
+        }
+    }catch (error) {
+        res.status(500).send('Lỗi khi lấy dữ liệu')
+    }
+})
 
 
 
