@@ -16,7 +16,7 @@ router.post('/register', async (req, res) => {
       // Tạo người dùng mới với email và mật khẩu đã mã hóa
       const user = new User({
         username: req.body.username,
-        email: req.body.email,  // Đảm bảo có email
+        email: req.body.email,  // Đảm bảo có emai
         password: req.body.password,  // Không cần mã hóa ở đây
       });
   

@@ -47,7 +47,7 @@ void setup() {
 }
 
 unsigned long previousMillis = 0;  // Biến lưu thời gian trước đó
-const long interval = 1800000;        // Thời gian trì hoãn (30 phút)
+const long interval = 100000;        // Thời gian trì hoãn (30 phút)
 
 void loop() {
   // Lấy thời gian hiện tại
