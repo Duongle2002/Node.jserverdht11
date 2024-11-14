@@ -67,70 +67,70 @@
                     <td>DEVICE1</td>
                     <td id="device1-status">Loading...</td>
                     <td>
-                        <button id="toggleBtn1" class="btn btn-success" onclick="toggleDeviceStatus('DEVICE1', 'toggleBtn1')">Bật</button>
+                        <button id="toggleBtn1" class="btn btn-danger" onclick="toggleDeviceStatus('DEVICE1', 'toggleBtn1')">Tắt</button>
                     </td>
                 </tr>
                 <tr>
                     <td>DEVICE2</td>
                     <td id="device2-status">Loading...</td>
                     <td>
-                        <button id="toggleBtn2" class="btn btn-success" onclick="toggleDeviceStatus('DEVICE2', 'toggleBtn2')">Bật</button>
+                        <button id="toggleBtn2" class="btn btn-danger" onclick="toggleDeviceStatus('DEVICE2', 'toggleBtn2')">Tắt</button>
                     </td>
                 </tr>
                 <tr>
                     <td>DEVICE3</td>
                     <td id="device3-status">Loading...</td>
                     <td>
-                        <button id="toggleBtn3" class="btn btn-success" onclick="toggleDeviceStatus('DEVICE3', 'toggleBtn3')">Bật</button>
+                        <button id="toggleBtn3" class="btn btn-danger" onclick="toggleDeviceStatus('DEVICE3', 'toggleBtn3')">Tắt</button>
                     </td>
                 </tr>
                 <tr>
                     <td>DEVICE4</td>
                     <td id="device4-status">Loading...</td>
                     <td>
-                        <button id="toggleBtn4" class="btn btn-success" onclick="toggleDeviceStatus('DEVICE4', 'toggleBtn4')">Bật</button>
+                        <button id="toggleBtn4" class="btn btn-danger" onclick="toggleDeviceStatus('DEVICE4', 'toggleBtn4')">Tắt</button>
                     </td>
                 </tr>
                 <tr>
                     <td>DEVICE5</td>
                     <td id="device5-status">Loading...</td>
                     <td>
-                        <button id="toggleBtn5" class="btn btn-success" onclick="toggleDeviceStatus('DEVICE5', 'toggleBtn5')">Bật</button>
+                        <button id="toggleBtn5" class="btn btn-danger" onclick="toggleDeviceStatus('DEVICE5', 'toggleBtn5')">Tắt</button>
                     </td>
                 </tr>
                 <tr>
                     <td>DEVICE6</td>
                     <td id="device6-status">Loading...</td>
                     <td>
-                        <button id="toggleBtn6" class="btn btn-success" onclick="toggleDeviceStatus('DEVICE6', 'toggleBtn6')">Bật</button>
+                        <button id="toggleBtn6" class="btn btn-danger" onclick="toggleDeviceStatus('DEVICE6', 'toggleBtn6')">Tắt</button>
                     </td>
                 </tr>
                 <tr>
                     <td>DEVICE7</td>
                     <td id="device7-status">Loading...</td>
                     <td>
-                        <button id="toggleBtn7" class="btn btn-success" onclick="toggleDeviceStatus('DEVICE7', 'toggleBtn7')">Bật</button>
+                        <button id="toggleBtn7" class="btn btn-danger" onclick="toggleDeviceStatus('DEVICE7', 'toggleBtn7')">Tắt</button>
                     </td>
                 </tr>
                 <tr>
                     <td>DEVICE8</td>
                     <td id="device8-status">Loading...</td>
                     <td>
-                        <button id="toggleBtn8" class="btn btn-success" onclick="toggleDeviceStatus('DEVICE8', 'toggleBtn8')">Bật</button>
+                        <button id="toggleBtn8" class="btn btn-danger" onclick="toggleDeviceStatus('DEVICE8', 'toggleBtn8')">Tắt</button>
                     </td>
                 </tr>
                 <tr>
                     <td>DEVICE9</td>
                     <td id="device9-status">Loading...</td>
                     <td>
-                        <button id="toggleBtn9" class="btn btn-success" onclick="toggleDeviceStatus('DEVICE9', 'toggleBtn9')">Bật</button>
+                        <button id="toggleBtn9" class="btn btn-danger" onclick="toggleDeviceStatus('DEVICE9', 'toggleBtn9')">Tắt</button>
                     </td>
                 </tr>
                 <tr>
                     <td>DEVICE10</td>
                     <td id="device10-status">Loading...</td>
                     <td>
-                        <button id="toggleBtn10" class="btn btn-success" onclick="toggleDeviceStatus('DEVICE10', 'toggleBtn10')">Bật</button>
+                        <button id="toggleBtn10" class="btn btn-danger" onclick="toggleDeviceStatus('DEVICE10', 'toggleBtn10')">Tắt</button>
                     </td>
                 </tr>
                 </tbody>
@@ -165,15 +165,15 @@
 
         devicesStatus[device] = !devicesStatus[device];
         if (devicesStatus[device]) {
-            setDeviceStatus(device, 'ON');
-            button.classList.remove('btn-danger');
-            button.classList.add('btn-success');
-            button.textContent = 'Bật';
-        } else {
             setDeviceStatus(device, 'OFF');
             button.classList.remove('btn-success');
             button.classList.add('btn-danger');
             button.textContent = 'Tắt';
+        } else {
+            setDeviceStatus(device, 'ON');
+            button.classList.remove('btn-danger');
+            button.classList.add('btn-success');
+            button.textContent = 'Bật';
         }
     }
 
