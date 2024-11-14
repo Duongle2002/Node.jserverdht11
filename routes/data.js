@@ -4,7 +4,7 @@ const Data = require('../model/data');
 
 // Khai báo mảng historyData để lưu trữ lịch sử
 let historyData = [];
-let deviceStatus = { DEVICE1: 'OFF', DEVICE2: 'OFF', DEVICE3: 'OFF' };
+let deviceStatus = { DEVICE1: 'OFF', DEVICE2: 'OFF', DEVICE3: 'OFF',DEVICE4: 'OFF', DEVICE5: 'OFF', DEVICE6: 'OFF' ,DEVICE7: 'OFF', DEVICE8: 'OFF', DEVICE9: 'OFF', DEVICE10: 'OFF'  };
 
 // ESP32 data update (Không yêu cầu authenticateToken)
 router.post('/updateData', async (req, res) => {

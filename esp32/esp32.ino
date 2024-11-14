@@ -10,6 +10,13 @@
 #define DEVICE_1_PIN 15
 #define DEVICE_2_PIN 2
 #define DEVICE_3_PIN 4
+#define DEVICE_4_PIN 5
+#define DEVICE_5_PIN 18
+#define DEVICE_6_PIN 19
+#define DEVICE_7_PIN 21
+#define DEVICE_8_PIN 22
+#define DEVICE_9_PIN 23
+#define DEVICE_10_PIN 34
 
 DHT dht(DHTPIN, DHTTYPE);
 
@@ -44,6 +51,14 @@ void setup() {
   pinMode(DEVICE_1_PIN, OUTPUT);
   pinMode(DEVICE_2_PIN, OUTPUT);
   pinMode(DEVICE_3_PIN, OUTPUT);
+  pinMode(DEVICE_4_PIN, OUTPUT);
+  pinMode(DEVICE_5_PIN, OUTPUT);
+  pinMode(DEVICE_6_PIN, OUTPUT);
+  pinMode(DEVICE_7_PIN, OUTPUT);
+  pinMode(DEVICE_8_PIN, OUTPUT);
+  pinMode(DEVICE_9_PIN, OUTPUT);
+  pinMode(DEVICE_10_PIN, OUTPUT);
+
 }
 
 unsigned long previousMillis = 0;  // Biến lưu thời gian trước đó
@@ -132,6 +147,27 @@ void controlDevices() {
 
         if (doc["DEVICE3"] == "ON") digitalWrite(DEVICE_3_PIN, HIGH);
         else digitalWrite(DEVICE_3_PIN, LOW);
+
+        if (doc["DEVICE1"] == "ON") digitalWrite(DEVICE_4_PIN, HIGH);
+        else digitalWrite(DEVICE_4_PIN, LOW);
+
+        if (doc["DEVICE2"] == "ON") digitalWrite(DEVICE_5_PIN, HIGH);
+        else digitalWrite(DEVICE_5_PIN, LOW);
+
+        if (doc["DEVICE3"] == "ON") digitalWrite(DEVICE_6_PIN, HIGH);
+        else digitalWrite(DEVICE_6_PIN, LOW);
+
+        if (doc["DEVICE1"] == "ON") digitalWrite(DEVICE_7_PIN, HIGH);
+        else digitalWrite(DEVICE_7_PIN, LOW);
+
+        if (doc["DEVICE2"] == "ON") digitalWrite(DEVICE_8_PIN, HIGH);
+        else digitalWrite(DEVICE_8_PIN, LOW);
+
+        if (doc["DEVICE3"] == "ON") digitalWrite(DEVICE_9_PIN, HIGH);
+        else digitalWrite(DEVICE_9_PIN, LOW);
+
+        if (doc["DEVICE3"] == "ON") digitalWrite(DEVICE_10_PIN, HIGH);
+        else digitalWrite(DEVICE_10_PIN, LOW);
       } else {
         Serial.println("Failed to parse JSON response");
       }
