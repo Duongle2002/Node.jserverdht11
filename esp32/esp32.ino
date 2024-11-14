@@ -1,4 +1,4 @@
-#include <WiFi.h>
+ #include <WiFi.h>
 #include <HTTPClient.h>
 #include <DHT.h>
 #include <ArduinoJson.h>  // Thêm thư viện ArduinoJson để phân tích JSON
@@ -148,25 +148,25 @@ void controlDevices() {
         if (doc["DEVICE3"] == "ON") digitalWrite(DEVICE_3_PIN, HIGH);
         else digitalWrite(DEVICE_3_PIN, LOW);
 
-        if (doc["DEVICE1"] == "ON") digitalWrite(DEVICE_4_PIN, HIGH);
+        if (doc["DEVICE4"] == "ON") digitalWrite(DEVICE_4_PIN, HIGH);
         else digitalWrite(DEVICE_4_PIN, LOW);
 
-        if (doc["DEVICE2"] == "ON") digitalWrite(DEVICE_5_PIN, HIGH);
+        if (doc["DEVICE5"] == "ON") digitalWrite(DEVICE_5_PIN, HIGH);
         else digitalWrite(DEVICE_5_PIN, LOW);
 
-        if (doc["DEVICE3"] == "ON") digitalWrite(DEVICE_6_PIN, HIGH);
+        if (doc["DEVICE6"] == "ON") digitalWrite(DEVICE_6_PIN, HIGH);
         else digitalWrite(DEVICE_6_PIN, LOW);
 
-        if (doc["DEVICE1"] == "ON") digitalWrite(DEVICE_7_PIN, HIGH);
+        if (doc["DEVICE7"] == "ON") digitalWrite(DEVICE_7_PIN, HIGH);
         else digitalWrite(DEVICE_7_PIN, LOW);
 
-        if (doc["DEVICE2"] == "ON") digitalWrite(DEVICE_8_PIN, HIGH);
+        if (doc["DEVICE8"] == "ON") digitalWrite(DEVICE_8_PIN, HIGH);
         else digitalWrite(DEVICE_8_PIN, LOW);
 
-        if (doc["DEVICE3"] == "ON") digitalWrite(DEVICE_9_PIN, HIGH);
+        if (doc["DEVICE9"] == "ON") digitalWrite(DEVICE_9_PIN, HIGH);
         else digitalWrite(DEVICE_9_PIN, LOW);
 
-        if (doc["DEVICE3"] == "ON") digitalWrite(DEVICE_10_PIN, HIGH);
+        if (doc["DEVICE10"] == "ON") digitalWrite(DEVICE_10_PIN, HIGH);
         else digitalWrite(DEVICE_10_PIN, LOW);
       } else {
         Serial.println("Failed to parse JSON response");
