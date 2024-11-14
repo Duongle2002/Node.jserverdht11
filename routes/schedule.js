@@ -5,7 +5,8 @@ const Schedule = require('../model/schedule');
 const authenticateToken = require('../middleware/authenticateToken');
 
 // Assuming deviceStatus is a globally declared object or stored in memory/database
-let deviceStatus = { DEVICE1: 'OFF', DEVICE2: 'OFF', DEVICE3: 'OFF' };
+let deviceStatus = { DEVICE1: 'OFF', DEVICE2: 'OFF', DEVICE3: 'OFF',DEVICE4: 'OFF', DEVICE5: 'OFF', DEVICE6: 'OFF' ,DEVICE7: 'OFF', DEVICE8: 'OFF', DEVICE9: 'OFF', DEVICE10: 'OFF'  };
+
 
 // Create new device schedule
 router.post('/scheduleDevice', async (req, res) => {

@@ -84,6 +84,55 @@
                         <button id="toggleBtn3" class="btn btn-success" onclick="toggleDeviceStatus('DEVICE3', 'toggleBtn3')">Bật</button>
                     </td>
                 </tr>
+                <tr>
+                    <td>DEVICE4</td>
+                    <td id="device4-status">Loading...</td>
+                    <td>
+                        <button id="toggleBtn4" class="btn btn-success" onclick="toggleDeviceStatus('DEVICE4', 'toggleBtn4')">Bật</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>DEVICE5</td>
+                    <td id="device5-status">Loading...</td>
+                    <td>
+                        <button id="toggleBtn5" class="btn btn-success" onclick="toggleDeviceStatus('DEVICE5', 'toggleBtn5')">Bật</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>DEVICE6</td>
+                    <td id="device6-status">Loading...</td>
+                    <td>
+                        <button id="toggleBtn6" class="btn btn-success" onclick="toggleDeviceStatus('DEVICE6', 'toggleBtn6')">Bật</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>DEVICE7</td>
+                    <td id="device7-status">Loading...</td>
+                    <td>
+                        <button id="toggleBtn7" class="btn btn-success" onclick="toggleDeviceStatus('DEVICE7', 'toggleBtn7')">Bật</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>DEVICE8</td>
+                    <td id="device8-status">Loading...</td>
+                    <td>
+                        <button id="toggleBtn8" class="btn btn-success" onclick="toggleDeviceStatus('DEVICE8', 'toggleBtn8')">Bật</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>DEVICE9</td>
+                    <td id="device9-status">Loading...</td>
+                    <td>
+                        <button id="toggleBtn9" class="btn btn-success" onclick="toggleDeviceStatus('DEVICE9', 'toggleBtn9')">Bật</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>DEVICE10</td>
+                    <td id="device10-status">Loading...</td>
+                    <td>
+                        <button id="toggleBtn10" class="btn btn-success" onclick="toggleDeviceStatus('DEVICE10', 'toggleBtn10')">Bật</button>
+                    </td>
+                </tr>
                 </tbody>
             </table>
         </div>
@@ -101,7 +150,14 @@
     const devicesStatus = {
         'DEVICE1': false,
         'DEVICE2': false,
-        'DEVICE3': false
+        'DEVICE3': false,
+        'DEVICE4': false,
+        'DEVICE5': false,
+        'DEVICE6': false,
+        'DEVICE7': false,
+        'DEVICE8': false,
+        'DEVICE9': false,
+        'DEVICE10': false,
     };
 
     function toggleDeviceStatus(device, buttonId) {
@@ -143,6 +199,13 @@
                 document.getElementById('device1-status').innerText = data.DEVICE1;
                 document.getElementById('device2-status').innerText = data.DEVICE2;
                 document.getElementById('device3-status').innerText = data.DEVICE3;
+                document.getElementById('device4-status').innerText = data.DEVICE4;
+                document.getElementById('device5-status').innerText = data.DEVICE5;
+                document.getElementById('device6-status').innerText = data.DEVICE6;
+                document.getElementById('device7-status').innerText = data.DEVICE7;
+                document.getElementById('device8-status').innerText = data.DEVICE8;
+                document.getElementById('device9-status').innerText = data.DEVICE9;
+                document.getElementById('device10-status').innerText = data.DEVICE10;
             });
     }
 
