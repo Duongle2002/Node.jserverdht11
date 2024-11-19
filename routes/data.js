@@ -77,5 +77,31 @@ router.get('/api/history', async (req, res) => {
 });
 
 
+router.get('/auth/profile', async (req, res) => {
+    try {
+        const user = req.user;  // Lấy thông tin người dùng từ req.user
+        console.log(user); // Ghi log thông tin người dùng để kiểm tra
+
+        if (!user) {
+            return res.status(400).json({ message: 'User not found' });
+        }
+
+        // Trả về thông tin người dùng
+        const userProfile = {
+            username: user.username,
+            userDisplayName: user.userDisplayName,
+            email: user.email,
+            role: user.role,
+            birthday: user.birthday,
+            gender: user.gender,
+            location: user.location
+        };
+
+        res.status(200).json(userProfile);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Lỗi khi lấy thông tin người dùng' });
+    }
+});
 
 module.exports = router;
