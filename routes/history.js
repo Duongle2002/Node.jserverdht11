@@ -15,16 +15,6 @@ router.get('/history', authenticateToken, async (req, res) => {
   }
 });
 
-// API route to get history data as JSON
-router.get('/api/history', authenticateToken, async (req, res) => {
-  try {
-    const historyData = await data.find().sort({ timestamp: -1 }); // Sắp xếp dữ liệu theo timestamp giảm dần
-    res.json(historyData); // Trả về dữ liệu dưới dạng JSON
-  } catch (err) {
-    // console.error("Error retrieving history data:", err);
-    res.status(500).send("Error retrieving history data");
-  }
-});
 
 router.get('/api',  async (req, res) => {
   try {

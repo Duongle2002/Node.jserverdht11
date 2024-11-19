@@ -162,6 +162,80 @@ router.post('/api/logout', (req, res) => {
   res.status(200).json({ message: 'Đăng xuất thành công.' });
 });
 
+// User profile update for web (with token verification)
+// Handle the profile update (POST request)
+router.post('/profile/update', authenticateToken, async (req, res) => {
+  try {
+    const user = req.user; // The user info from the JWT token
+    const { userDisplayName, email, birthday, gender, location } = req.body;
+
+    if (!user) {
+      return res.status(400).json({ message: 'User not found' });
+    }
+
+    // Update the user's profile details
+    const updatedUser = await User.findByIdAndUpdate(user._id, {
+      userDisplayName,
+      email,
+      birthday,
+      gender,
+      location,
+    }, { new: true }); // Return the updated user
+
+    // Redirect to the profile page or show a success message
+    res.redirect('/auth/profile'); // Or you can render a confirmation message
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Error updating profile' });
+  }
+});
+
+router.get('/profile/update', authenticateToken, async (req, res) => {
+  try {
+    const user = req.user; // The user info from the JWT token
+
+    if (!user) {
+      return res.status(400).json({ message: 'User not found' });
+    }
+
+    // Render the profile update page and pass the current user's data to the template
+    res.render('auth/updateProfile', {
+      user,
+      title: 'Update Profile',
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Error rendering profile update page' });
+  }
+});
+// API Route for updating user profile (for Flutter app)
+router.post('/api/profile/update', authenticateToken, async (req, res) => {
+  try {
+    const { userId } = req.body; // The user's ID should be included in the request body
+    const { userDisplayName, email, birthday, gender, location } = req.body;
+
+    if (!userId) {
+      return res.status(400).json({ message: 'User ID is required' });
+    }
+
+    // Find the user by ID and update their information
+    const updatedUser = await User.findByIdAndUpdate(userId, {
+      userDisplayName,
+      email,
+      birthday,
+      gender,
+      location,
+    }, { new: true }); // Return the updated user
+
+    res.status(200).json({
+      message: 'Profile updated successfully',
+      user: updatedUser,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Error updating profile' });
+  }
+});
 
 
 module.exports = router;

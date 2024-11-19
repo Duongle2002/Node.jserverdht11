@@ -1,0 +1,35 @@
+<!-- views/auth/updateProfile.ejs -->
+
+<h1>Update Profile</h1>
+<form action="/auth/profile/update" method="POST">
+    <div>
+        <label for="userDisplayName">Display Name:</label>
+        <input type="text" id="userDisplayName" name="userDisplayName" value="<%= user.userDisplayName %>" required>
+    </div>
+
+    <div>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" value="<%= user.email %>" required>
+    </div>
+
+    <div>
+        <label for="birthday">Birthday:</label>
+        <input type="date" id="birthday" name="birthday" value="<%= user.birthday %>" required>
+    </div>
+
+    <div>
+        <label for="gender">Gender:</label>
+        <select id="gender" name="gender">
+            <option value="male" <%= user.gender === 'male' ? 'selected' : '' %>>Male</option>
+            <option value="female" <%= user.gender === 'female' ? 'selected' : '' %>>Female</option>
+            <option value="other" <%= user.gender === 'other' ? 'selected' : '' %>>Other</option>
+        </select>
+    </div>
+
+    <div>
+        <label for="location">Location:</label>
+        <input type="text" id="location" name="location" value="<%= user.location %>" required>
+    </div>
+
+    <button type="submit">Update Profile</button>
+</form>

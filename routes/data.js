@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Data = require('../model/data');
+const data = require("../model/data");
 
 // Khai báo mảng historyData để lưu trữ lịch sử
 let historyData = [];
@@ -65,6 +66,15 @@ router.get('/api/sensorData', async (req, res) => {
         res.status(500).send('Lỗi khi lấy dữ liệu')
     }
 })
+router.get('/api/history', async (req, res) => {
+    try {
+        const historyData = await data.find().sort({ timestamp: -1 }); // Sắp xếp dữ liệu theo timestamp giảm dần
+        res.json(historyData); // Trả về dữ liệu dưới dạng JSON
+    } catch (err) {
+        // console.error("Error retrieving history data:", err);
+        res.status(500).send("Error retrieving history data");
+    }
+});
 
 
 
