@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Data = require('../model/data');
 const data = require("../model/data");
+const Schedule = require("../model/schedule");
 
 // Khai báo mảng historyData để lưu trữ lịch sử
 let historyData = [];
@@ -53,6 +54,45 @@ router.post('/setDeviceStatus', (req, res) => {
         res.status(400).send('Invalid device or status');
     }
 });
+
+
+router.post('/scheduleDevice', async (req, res) => {
+    const { device, action, scheduleTime } = req.body;
+
+    try {
+        const scheduleEntry = new Schedule({ device, action, scheduleTime });
+        await scheduleEntry.save();
+        console.log("Scheduled device:", scheduleEntry);
+        res.json({ message: `Scheduled ${device} to ${action} at ${scheduleTime}` });
+    } catch (err) {
+        console.error("Error scheduling device:", err);
+        res.status(500).json({ message: "Error scheduling device" });
+    }
+});
+
+
+setInterval(async () => {
+    const currentTime = new Date();
+
+    try {
+        const schedules = await Schedule.find({ scheduleTime: { $lte: currentTime } });
+
+        for (const schedule of schedules) {
+            if (deviceStatus.hasOwnProperty(schedule.device)) {
+                deviceStatus[schedule.device] = schedule.action;
+                console.log(`Device ${schedule.device} set to ${schedule.action} as per schedule`);
+
+                // Remove the executed schedule
+                await Schedule.deleteOne({ _id: schedule._id });
+            } else {
+                console.warn(`Unknown device: ${schedule.device}`);
+            }
+        }
+    } catch (err) {
+        console.error("Error executing scheduled tasks:", err);
+    }
+}, 60000);
+
 router.get('/api/sensorData', async (req, res) => {
     try {
         const  latestData = await Data.findOne().sort({ timestamp: -1 });
