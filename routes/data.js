@@ -124,19 +124,30 @@ router.get('/schedule', async (req, res) => {
 // Xử lý thiết bị theo lịch hẹn mỗi 30 giây
 setInterval(async () => {
     const currentTime = new Date();
+    console.log("Thời gian hiện tại:", currentTime);
+
     try {
         const schedules = await Schedule.find({ scheduleTime: { $lte: currentTime } });
+        console.log("Các lịch hẹn cần xử lý:", schedules);
+
         for (const schedule of schedules) {
             if (deviceStatus.hasOwnProperty(schedule.device)) {
                 deviceStatus[schedule.device] = schedule.action;
-                console.log(`Device ${schedule.device} set to ${schedule.action}`);
+                console.log(`Thiết bị: ${schedule.device} được đặt thành: ${schedule.action}`);
+            } else {
+                console.log(`Thiết bị: ${schedule.device} không tồn tại.`);
             }
         }
-        // Xóa lịch hẹn đã thực thi
+
+        // Xóa các lịch hẹn đã thực thi
         await Schedule.deleteMany({ scheduleTime: { $lte: currentTime } });
+        console.log("Đã xóa các lịch hẹn đã thực thi.");
     } catch (error) {
-        console.error("Error processing schedules:", error);
+        console.error("Lỗi khi xử lý lịch hẹn:", error);
     }
+
+    console.log("Trạng thái thiết bị hiện tại:", deviceStatus);
 }, 30000);
+
 
 module.exports = router;
