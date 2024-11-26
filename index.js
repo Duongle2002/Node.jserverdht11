@@ -38,7 +38,7 @@ app.use('/', dataRoutes); // Áp dụng dataRoutes mà không cần xác thực 
 
 // Các route bảo mật
 app.use('/', authenticateToken, deviceRoutes); // Bảo vệ các route của device
-app.use('/', authenticateToken, scheduleRoutes); // Bảo vệ các route của schedule
+// app.use('/', authenticateToken, scheduleRoutes); // Bảo vệ các route của schedule
 app.use('/', authenticateToken, historyRoutes); // Bảo vệ các route của history
 
 // Bảo vệ trang chủ với xác thực

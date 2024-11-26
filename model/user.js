@@ -7,9 +7,9 @@ const userSchema = new mongoose.Schema({
     email: {type : String, required : true, unique : true},
     password: {type : String, required : true},
     role: {type : String, enum: ['user', 'admin'],default:'user'},
-    birthday: {type : Date, default: null},
+    birthday: {type : Date, default: '1990-05-15'},
     gender: {type : String, enum: ['male', 'female', 'other'],default:'other'},
-    location: {type : String, default: null},
+    location: {type : String, default: 'ĐÀ NẴNG-VIỆT NAM'},
 });
 
 userSchema.pre("save", async function (next) {
