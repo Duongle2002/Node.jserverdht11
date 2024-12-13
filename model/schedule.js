@@ -1,17 +1,9 @@
 const mongoose = require('mongoose');
 
 const scheduleSchema = new mongoose.Schema({
-  device: String,
-  action: String, // "ON" hoặc "OFF"
-  scheduleTime: Date, // Thời gian bật hoặc tắt thiết bị
-  name: String,
-  bgColor: String,
-  subTitle: String,
-  icon: String,
-  isSwitch: Boolean,
-  isIcon: Boolean,
-
+  device: { type: String, required: true },
+  action: { type: String, enum: ['ON', 'OFF'], required: true },
+  scheduleTime: { type: Date, required: true }
 });
 
-const Schedule = mongoose.model('Schedule', scheduleSchema);
-module.exports = Schedule;
+module.exports = mongoose.model('Schedule', scheduleSchema);

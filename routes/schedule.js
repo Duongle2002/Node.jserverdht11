@@ -23,3 +23,20 @@
 // });
 //
 // module.exports = router;
+const express = require('express');
+const router = express.Router();
+const Schedule = require('../model/schedule');
+const authenticateToken = require('../middleware/authenticateToken');
+
+
+router.get('/schedule', authenticateToken, async (req, res) => {
+    try {
+        const schedules = await Schedule.find();
+        res.render('schedule', { schedules });
+    } catch (err) {
+        console.error("Error retrieving schedules:", err);
+        res.status(500).send("Error retrieving schedules");
+    }
+});
+
+module.exports = router;

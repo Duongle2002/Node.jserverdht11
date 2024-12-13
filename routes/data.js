@@ -105,7 +105,7 @@ router.get('/schedules', async (req, res) => {
         const schedules = await Schedule.find();
         res.json(schedules);
     } catch (err) {
-       // console.error("Error retrieving schedules:", err);
+        // console.error("Error retrieving schedules:", err);
         res.status(500).send("Error retrieving schedules");
     }
 });
@@ -114,7 +114,7 @@ router.get('/schedule', async (req, res) => {
         const schedules = await Schedule.find(); // Lấy danh sách lịch hẹn từ database
         res.render('schedule', { schedules }); // Truyền danh sách lịch hẹn vào giao diện
     } catch (err) {
-       // console.error("Lỗi khi lấy lịch hẹn:", err);
+        // console.error("Lỗi khi lấy lịch hẹn:", err);
         res.status(500).send("Lỗi khi lấy lịch hẹn");
     }
 });
@@ -123,31 +123,33 @@ router.get('/schedule', async (req, res) => {
 
 // Xử lý thiết bị theo lịch hẹn mỗi 30 giây
 setInterval(async () => {
-    const currentTime = new Date();
-    //console.log("Thời gian hiện tại:", currentTime);
+    const currentTime = new Date(); // Thời gian hiện tại
+    console.log("Thời gian hiện tại:", currentTime);
 
     try {
+        // Lấy các lịch hẹn cần xử lý
         const schedules = await Schedule.find({ scheduleTime: { $lte: currentTime } });
-        //console.log("Các lịch hẹn cần xử lý:", schedules);
+        console.log("Các lịch hẹn cần xử lý:", schedules);
 
         for (const schedule of schedules) {
-            if (deviceStatus.hasOwnProperty(schedule.device)) {
+            if (deviceStatus[schedule.device]) {
                 deviceStatus[schedule.device] = schedule.action;
-               // console.log(`Thiết bị: ${schedule.device} được đặt thành: ${schedule.action}`);
+                console.log(`Thiết bị ${schedule.device} đã được đặt thành ${schedule.action}`);
             } else {
-               //console.log(`Thiết bị: ${schedule.device} không tồn tại.`);
+                console.error(`Thiết bị ${schedule.device} không tồn tại.`);
             }
         }
 
-        // Xóa các lịch hẹn đã thực thi
+        // Xóa các lịch hẹn đã xử lý
         await Schedule.deleteMany({ scheduleTime: { $lte: currentTime } });
-       // console.log("Đã xóa các lịch hẹn đã thực thi.");
+        console.log("Đã xóa các lịch hẹn đã thực thi.");
     } catch (error) {
         console.error("Lỗi khi xử lý lịch hẹn:", error);
     }
 
-    //console.log("Trạng thái thiết bị hiện tại:", deviceStatus);
+    console.log("Trạng thái thiết bị hiện tại:", deviceStatus);
 }, 30000);
+
 
 
 module.exports = router;
